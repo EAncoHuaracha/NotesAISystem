@@ -34,4 +34,7 @@ export class ProjectsApiService {
   saveProject(id: string, canvas: any) {
     return this.http.put(`${this.apiUrl}/projects/${id}`, canvas);
   }
+  sendToAI(data: { imageBase64: string; prompt: string }): Observable<{ result: string }> {
+    return this.http.post<{ result: string }>(`${this.apiUrl}/projects/ai/process`, data);
+  }
 }
