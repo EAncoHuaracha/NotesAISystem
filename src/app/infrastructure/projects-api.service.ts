@@ -27,7 +27,11 @@ export class ProjectsApiService {
     return this.http.delete(`${this.apiUrl}/projects/${id}`);
   }
 
-  getProject(id: string): Observable<Canvas> {
+  getProject(id: string): Observable<any> {
     return this.http.get<Canvas>(`${this.apiUrl}/projects/${id}`);
+  }
+
+  saveProject(id: string, canvas: any) {
+    return this.http.put(`${this.apiUrl}/projects/${id}`, canvas);
   }
 }

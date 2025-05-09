@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './create-project.component.html',
-  styleUrl: './create-project.component.css'
+  styleUrl: './create-project.component.css',
+  providers: [ProjectsApiService]
 })
 export class CreateProjectComponent {
   form: FormGroup;
@@ -49,11 +50,4 @@ export class CreateProjectComponent {
   close() {
     this.closeEvent.emit()
   }
-
-
-
-
-
-
-
 }

@@ -4,6 +4,8 @@ import { Project } from '../../../core/models/project.model';
 import { ProjectsApiService } from '../../../infrastructure/projects-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { mapDate } from '../../../core/utils/date.utils';
+import { Router } from '@angular/router';
+import { RoutesNotesAI } from '../../../core/constants/routes.constants';
 
 @Component({
   selector: 'app-projects',
@@ -23,6 +25,7 @@ export class ProjectsComponent {
 
   constructor(
     private readonly projectsApiService: ProjectsApiService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit() {
@@ -44,7 +47,7 @@ export class ProjectsComponent {
   }
 
   openProject(id: string) {
-    console.log('Open project with id:', id);
+    this.router.navigate([RoutesNotesAI.PROJECTS, id]);
   }
 
   deleteProject(id: string) {
