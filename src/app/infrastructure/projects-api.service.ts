@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment/firebase-config';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Project } from '../core/models/project.model';
 import { Canvas } from '../core/models/canvas.model';
 

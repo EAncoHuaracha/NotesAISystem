@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { mapDate } from '../../../core/utils/date.utils';
 import { Router } from '@angular/router';
 import { RoutesNotesAI } from '../../../core/constants/routes.constants';
+import { Subscription } from 'rxjs';
+import { ProjectRefreshService } from '../../../infrastructure/project-refresh.service';
 
 @Component({
   selector: 'app-projects',
@@ -23,13 +25,26 @@ export class ProjectsComponent {
 
   mapDate = mapDate;
 
+  refreshSubscription: Subscription;
+
   constructor(
     private readonly projectsApiService: ProjectsApiService,
+    private readonly projectRefreshService: ProjectRefreshService,
     private readonly router: Router,
-  ) {}
+  ) {
+    this.refreshSubscription = this.projectRefreshService.refreshProjects$.subscribe(() => {
+      this.getProjects();
+    });
+  }
 
   ngOnInit() {
     this.getProjects();
+  }
+
+  ngOnDestroy() {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
   getProjects() {
@@ -51,6 +66,15 @@ export class ProjectsComponent {
   }
 
   deleteProject(id: string) {
-    console.log('Delete project with id:', id);
+    this.status = 'loading';
+    this.projectsApiService.deleteProject(id).subscribe({
+      next: () => {
+        this.getProjects();
+      },
+      error: (error) => {
+        console.error('Error deleting project:', error);
+        this.status = 'error';
+      }
+    })
   }
 }

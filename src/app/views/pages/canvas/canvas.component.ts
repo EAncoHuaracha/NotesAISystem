@@ -75,7 +75,7 @@ export class CanvasComponent {
       left: 100,
       top: 100,
       fill: 'black',
-      fontSize: 20,
+      fontSize: 12,
     });
     this.canvas.add(text);
     this.canvas.setActiveObject(text);
@@ -94,6 +94,7 @@ export class CanvasComponent {
       projectId: 'ID_DEL_PROYECTO',
       content: JSON.stringify(json),
     };
+    console.log('Canvas data:', data);
     this.projectsApiService.saveProject(data.projectId, data).subscribe({
       next: (response) => {
         console.log('Canvas saved:', response);

@@ -3,6 +3,7 @@ import { ProjectsApiService } from '../../../../infrastructure/projects-api.serv
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProjectRefreshService } from '../../../../infrastructure/project-refresh.service';
 
 @Component({
   selector: 'app-create-project',
@@ -23,6 +24,7 @@ export class CreateProjectComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly projectsApiService: ProjectsApiService,
+    private readonly refreshProjects: ProjectRefreshService,
     private readonly router: Router,
   ) {
     this.form = this.formBuilder.group({
@@ -35,8 +37,9 @@ export class CreateProjectComponent {
       const project = this.form.value;
       this.projectsApiService.createProject(project).subscribe({
         next: () => {
-          this.router.navigate(['/projects']);
+          this.refreshProjects.triggerRefresh();
           this.close();
+          this.router.navigate(['/projects']);
         },
         error: (error) => {
           console.error('Error creating project:', error);
