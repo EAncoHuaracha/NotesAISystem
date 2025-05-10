@@ -27,7 +27,7 @@
 
                 <!-- Top Row: Title & Delete -->
                 <div class="flex items-start justify-between mb-8">
-                    <h2 class="text-3xl font-semibold text-gray-800 truncate w-5/6">{{ item.name }}</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 truncate w-5/6">{{ item.name }}</h2>
                     <button (click)="deleteProject(item._id); $event.stopPropagation()"
                         class="text-red-400 hover:text-red-600 transition" title="Eliminar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
