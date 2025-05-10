@@ -1,31 +1,30 @@
-<app-navbar></app-navbar>
-
-<div class="flex h-[calc(100vh-64px)]">
-    <!-- Sidebar -->
-    <div class="w-16 bg-linear-to-br from-violet-500 to-blue-600 text-white flex flex-col items-center py-4 space-y-4">
-        <button (click)="enableDraw()" title="Dibujar">
+<!-- Toolbar -->
+<div class="fixed top-0 left-0 w-full z-50 flex justify-center py-4">
+    <div
+        class="flex space-x-4 text-white items-center px-4 py-2 rounded-md bg-opacity-90 bg-linear-to-br from-violet-500 to-blue-600 max-w-screen-md">
+        <!-- Button draw -->
+        <button (click)="enableDraw()" title="Draw" class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M20.71 7.04c-.34.34-.67.67-.68 1c-.03.32.31.65.63.96c.48.5.95.95.93 1.44s-.53 1-1.04 1.5l-4.13 4.14L15 14.66l4.25-4.24l-.96-.96l-1.42 1.41l-3.75-3.75l3.84-3.83c.39-.39 1.04-.39 1.41 0l2.34 2.34c.39.37.39 1.02 0 1.41M3 17.25l9.56-9.57l3.75 3.75L6.75 21H3z" />
             </svg>
         </button>
-        <button (click)="enableSelect()" title="Seleccionar">
+        <!-- Button select -->
+        <button (click)="enableSelect()" title="Select" class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <g fill="none" fill-rule="evenodd">
-                    <path
-                        d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                    <path fill="currentColor"
-                        d="M6.682 3.396a1.088 1.088 0 0 1 1.807-.745l9.951 8.827c.724.642.312 1.84-.655 1.9l-3.117.191l2.092 4.999a2 2 0 0 1-1.062 2.612l-.868.37a2 2 0 0 1-2.626-1.061l-2.226-5.262l-2.323 2.007c-.73.63-1.858.07-1.797-.892z" />
-                </g>
+                <path fill="currentColor"
+                    d="M6.682 3.396a1.088 1.088 0 0 1 1.807-.745l9.951 8.827c.724.642.312 1.84-.655 1.9l-3.117.191l2.092 4.999a2 2 0 0 1-1.062 2.612l-.868.37a2 2 0 0 1-2.626-1.061l-2.226-5.262l-2.323 2.007c-.73.63-1.858.07-1.797-.892z" />
             </svg>
         </button>
-        <button (click)="addText()" title="Texto">
+        <!-- Button text -->
+        <button (click)="addText()" title="Text" class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor" fill-rule="evenodd"
                     d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m9 6h3.5V7h-9v2H11v8h2z" />
             </svg>
         </button>
-        <button (click)="enableErase()" title="Borrar">
+        <!-- Button erase -->
+        <button (click)="enableErase()" title="Erase" class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M11.41 5.505C13.08 3.835 13.915 3 14.952 3c1.038 0 1.873.835 3.543 2.505S21 8.01 21 9.048c0 1.037-.835 1.872-2.505 3.542l-4.193 4.194l-7.086-7.086z" />
@@ -33,30 +32,40 @@
                     d="m6.156 10.759l7.085 7.085l-.65.65c-.378.379-.713.714-1.018 1.006H21a.75.75 0 0 1 0 1.5H9c-1.016-.025-1.85-.86-3.495-2.505C3.835 16.825 3 15.99 3 14.952c0-1.037.835-1.872 2.505-3.542z" />
             </svg>
         </button>
-        <button (click)="saveCanvas()" title="Guardar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                viewBox="0 0 512 512">
+        <!-- Button save -->
+        <button (click)="saveCanvas()" title="Save" class="cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                 <path fill="currentColor"
                     d="m465.94 119.76l-73.7-73.7A47.68 47.68 0 0 0 358.3 32H96a64 64 0 0 0-64 64v320a64 64 0 0 0 64 64h320a64 64 0 0 0 64-64V153.7a47.68 47.68 0 0 0-14.06-33.94M120 112h176a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8H120a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8m139.75 319.91a80 80 0 1 1 76.16-76.16a80.06 80.06 0 0 1-76.16 76.16" />
                 <circle cx="256" cy="352" r="48" fill="currentColor" />
             </svg>
         </button>
-        <button (click)="processSelectionWithAI()" title="IA">IA</button>
-    </div>
-
-    <!-- Canvas -->
-    <div class="flex-1 p-2 relative">
-        <div class="h-full w-full relative">
-            <canvas #canvas class="w-full h-full block border border-gray-400 rounded shadow-md"></canvas>
-
-            <!-- Resizer -->
-            <div class="absolute bottom-1 right-1 cursor-nwse-resize z-10 flex justify-center items-center"
-                (mousedown)="startResizing($event)">
-                <!-- Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512">
-                    <path fill="currentColor"
-                        d="M29 30l1 90h36V66h26V30zm99 0v36h72V30zm108 0v36h72V30zm108 0v36h72V30zm102 0v78h36V30zm-206 80v36h100.543l-118 118H30v218h218V289.457l118-118V272h36V110zm206 34v72h36v-72zM30 156v72h36v-72zm416 96v72h36v-72zm0 108v72h36v-72zm-166 86v36h72v-36zm108 0v36h72v-36z" />
-                </svg>
-            </div>
-        </div>
+        <!-- Button generate image with AI -->
+        <button (click)="showInput = !showInput" title="Generate Image" class="cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="m20.713 8.128l-.246.566a.506.506 0 0 1-.934 0l-.246-.566a4.36 4.36 0 0 0-2.22-2.25l-.759-.339a.53.53 0 0 1 0-.963l.717-.319a4.37 4.37 0 0 0 2.251-2.326l.253-.611a.506.506 0 0 1 .942 0l.253.61a4.37 4.37 0 0 0 2.25 2.327l.718.32a.53.53 0 0 1 0 .962l-.76.338a4.36 4.36 0 0 0-2.219 2.251M2.992 3H14v2H4v14l9.292-9.294a1 1 0 0 1 1.415 0L20 15.01V11h2v9.007a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3M8 11a2 2 0 1 1 0-4a2 2 0 0 1 0 4" />
+            </svg>
+        </button>
     </div>
 </div>
+
+@if (showInput) {
+    <div class="fixed bottom-0 left-0 w-full z-50 flex justify-center py-4 bg-white">
+        <input [(ngModel)]="prompt" (keyup.enter)="processSelectionWithAI()" class="p-2 border rounded-md w-3/4" type="text"
+            placeholder="Enter prompt for AI">
+        <button (click)="processSelectionWithAI()"
+            class="p-2 bg-linear-to-br from-violet-500 to-blue-600 text-white rounded-md ml-2 cursor-pointer">Generate</button>
+    </div>
+}
+
+<!-- Canvas-->
+<canvas #canvas class="w-full h-full"></canvas>
+
+
+@if (status === 'loading') {
+    <div class="fixed inset-0 bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="absolute inset-0 bg-gray-800 opacity-10 cursor-wait"></div>
+        <div class="loader"></div>
+    </div>
+}

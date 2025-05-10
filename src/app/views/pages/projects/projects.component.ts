@@ -70,6 +70,7 @@ export class ProjectsComponent {
     this.projectsApiService.deleteProject(id).subscribe({
       next: () => {
         this.getProjects();
+        this.status = 'success';
       },
       error: (error) => {
         console.error('Error deleting project:', error);

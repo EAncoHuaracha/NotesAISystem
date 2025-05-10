@@ -2,11 +2,27 @@
 
 <!-- Projects Cards -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 p-6">
+
+    @if (status === 'loading') {
+        <!-- Skeleton Cards -->
+        @for (item of [1, 2, 3]; track $index) {
+        <div class="bg-gray-200 rounded-xl shadow-md p-4 animate-pulse">
+            <!-- Top Skeleton Row -->
+            <div class="flex justify-between items-start mb-4">
+                <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+                <div class="bg-gray-300 h-4 w-4 rounded"></div>
+            </div>
+
+            <!-- Bottom Skeleton Row -->
+            <div class="bg-gray-300 h-3 w-1/2 rounded mb-2"></div>
+            <div class="bg-gray-300 h-4 w-6 rounded self-end ml-auto"></div>
+        </div>
+        }
+    }
     @for (item of projects; track $index) {
         <div class="relative group bg-linear-to-br from-violet-200 to-blue-200 rounded-xl shadow-md p-4 hover:bg-linear-to-br hover:from-violet-300 hover:scale-102 hover:to-blue-300 transition-all duration-300 cursor-pointer"
-            (click)="openProject(item._id)"
-            (keydown)="openProject(item._id)">
-            
+            (click)="openProject(item._id)" (keydown)="openProject(item._id)">
+
             <!-- Top Row: Title & Delete -->
             <div class="flex items-start justify-between mb-4">
                 <h2 class="text-lg font-semibold text-gray-800 truncate w-5/6">{{ item.name }}</h2>
