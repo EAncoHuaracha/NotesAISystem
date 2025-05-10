@@ -6,18 +6,13 @@ export class AiProcessor {
         private canvas: fabric.Canvas,
         private api: ProjectsApiService
     ) { }
-
     async processSelection(base64: string, prompt: string, projectId: string): Promise<void> {
         return new Promise((resolve, reject) => {
             this.api.sendToAI({ imageBase64: base64, prompt }).subscribe({
                 next: (response) => {
-                    // Recibimos la imagen base64 generada por la API
-                    const processedImageBase64 = response.result;
-
-                    // Convertimos el base64 a una imagen
                     const img = new Image();
                     img.crossOrigin = 'anonymous';
-                    img.src = processedImageBase64;
+                    img.src = response.result;
 
                     img.onload = () => {
                         const canvasWithoutBackground = this.removeBackgroundByColor(img);
@@ -52,6 +47,7 @@ export class AiProcessor {
             });
         });
     }
+
 
     // Function to process the image and remove the background
     removeBackgroundByColor(img: HTMLImageElement): HTMLCanvasElement {

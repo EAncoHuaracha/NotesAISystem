@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import * as fabric from 'fabric';
 import { ProjectsApiService } from '../../../infrastructure/projects-api.service';
@@ -8,6 +8,7 @@ import { CanvasTools } from '../../../core/utils/canvas-tools.utils';
 import { CanvasExporter } from '../../../core/utils/canvas-exporter.utils';
 import { AiProcessor } from '../../../core/utils/ai-processor.utils';
 import { CanvasInitializer } from '../../../core/utils/canvas-initializer.utils';
+import { RoutesNotesAI } from '../../../core/constants/routes.constants';
 
 @Component({
   selector: 'app-canvas',
@@ -36,7 +37,8 @@ export class CanvasComponent {
 
   constructor(
     private readonly projectsApiService: ProjectsApiService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
   ) { }
 
   ngAfterViewInit(): void {
@@ -57,6 +59,7 @@ export class CanvasComponent {
   enableErase() { this.tools.enableErase(); }
   addText() { this.tools.addText(); }
   enableSelect() { this.tools.enableSelect(); }
+  enableArrow() { this.tools.enableArrow(); }
 
   saveCanvas() {
     if (!this.projectId) return;
@@ -73,13 +76,14 @@ export class CanvasComponent {
     const base64 = this.exporter.exportSelectedToBase64();
     if (!base64 || !this.projectId) return;
     this.aiProcessor.processSelection(base64, this.prompt, this.projectId).then(() => {
+      this.prompt = '';
+      this.showInput = false;
       this.status = 'success';
     }).catch(err => {
       this.status = 'error';
       console.error(err);
     });
   }
-
 
   loadCanvas(projectId: string) {
     this.status = 'loading';
@@ -112,5 +116,9 @@ export class CanvasComponent {
     this.canvas.setWidth(window.innerWidth);
     this.canvas.setHeight(window.innerHeight);
     this.canvas.renderAll();
+  }
+
+  goToProjects() {
+    this.router.navigate([RoutesNotesAI.PROJECTS]);
   }
 }
