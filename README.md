@@ -1,3 +1,7 @@
+# Backend repository
+
+[Notes AI System Backend](https://github.com/EAncoHuaracha/NotesAISystem-Backend).
+
 # NotesAISystem
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
